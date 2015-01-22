@@ -1,0 +1,4 @@
+At the moment, the application simulates the Hot Potato game on a local client.
+When you launch the programm, you'll get a message "play". 
+You then can write messages, for example "pass P3". There are 4 players : P0, P1, P2 and P3.
+Good game :)
