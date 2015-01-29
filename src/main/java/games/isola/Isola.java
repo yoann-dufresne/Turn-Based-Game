@@ -1,3 +1,23 @@
+/*******************************************************************************
+ * This application simulates turn-based games hosted on a server.
+ *     Copyright (C) 2014 
+ *     Initiators : Fabien Delecroix and Yoann Dufresne
+ *     Developpers :  Celia Cacciatore, Guillaume Ferlin, Raphael Bauduin, Robin Lewandowicz and Yassine Badache
+ * 
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * 
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ * 
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ ******************************************************************************/
+
 package games.isola;
 
 import games.isola.exceptions.CaseNotEmptyException;
@@ -9,7 +29,6 @@ import games.isola.moves.MovePlayer;
 import games.isola.moves.PutCross;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -159,6 +178,7 @@ public class Isola extends Game {
 	public boolean isFinished() {
 
 		if(currentState instanceof TurnIsolaPutCross){
+			// the state TurnIsolaPutCross is not a final state
 			return false;
 		}
 
@@ -249,6 +269,7 @@ public class Isola extends Game {
 
 	}
 
+	
 	private int getPlayerTag(Player p){
 		return this.getPlayers().get(0).equals(p) ? 1 : 2;
 	}
@@ -256,24 +277,6 @@ public class Isola extends Game {
 	private void putPlayerToken(int playerTag, int x, int y){
 		this.grid[x][y] = playerTag;
 	}
-
-	private void removePlayerToken(int playerTag){
-
-		for(int x=0; x<grid.length ; ++x){
-			for(int y=0; y<grid[0].length ; ++y){
-
-				if(this.grid[x][y] == playerTag){
-					this.freeGridCase(x,y);
-					return;
-				}
-
-
-			}
-		}
-
-	}
-
-
 
 
 	private void freeGridCase(int x, int y) {
