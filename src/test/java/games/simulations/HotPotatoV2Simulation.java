@@ -2,7 +2,7 @@
  * This application simulates turn-based games hosted on a server.
  *     Copyright (C) 2014 
  *     Initiators : Fabien Delecroix and Yoann Dufresne
- *     Developpers :  Celia Cacciatore and Guillaume Ferlin and Raphael Bauduin and Robin Lewandowicz and Yassine Badache
+ *     Developpers : Raphael Bauduin and Celia Cacciatore
  * 
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -18,27 +18,20 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package games.isola.fsm;
+package games.simulations;
 
-import games.isola.Isola;
-
-import java.util.Set;
-
-import model.fsm.SimpleState;
-import model.moves.Move;
-import model.players.Player;
-
+import games.hotpotatoV2.HotPotatoHostV2;
 
 /**
- * TurnIsolaPutCross : the state active when a player have to condamn a case
+ * Enables to play the HotPotato game.
  * 
- * @author Guillaume Ferlin - Robin Lewandowicz - Yassine Badache
+ * @author Robin Lewandowicz - Guillaume Ferlin
  */
-public class TurnIsolaPutCross extends SimpleState<Isola> {
-
-	public TurnIsolaPutCross(Player currentPlayer,
-			Set<Class<? extends Move<Isola>>> possibleMoveTypes) {
-		super(currentPlayer, possibleMoveTypes);
+public class HotPotatoV2Simulation {
+	
+	public static void main(String[] args) {
+		// Play the HotPotato game.
+		HotPotatoHostV2 hotPotatoHost = new HotPotatoHostV2();
+		hotPotatoHost.playGame();
 	}
-
 }

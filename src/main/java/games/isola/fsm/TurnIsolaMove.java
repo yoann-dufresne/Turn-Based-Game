@@ -20,9 +20,11 @@
 
 package games.isola.fsm;
 
+import games.isola.Isola;
+
 import java.util.Set;
 
-import games.isola.Isola;
+import model.fsm.SimpleState;
 import model.fsm.State;
 import model.moves.Move;
 import model.players.Player;
@@ -32,7 +34,7 @@ import model.players.Player;
  * 
  * @author Guillaume Ferlin - Robin Lewandowicz - Yassine Badache
  */
-public class TurnIsolaMove extends State<Isola> {
+public class TurnIsolaMove extends SimpleState<Isola> {
 
 	public TurnIsolaMove(Player currentPlayer,
 			Set<Class<? extends Move<Isola>>> possibleMoveTypes) {

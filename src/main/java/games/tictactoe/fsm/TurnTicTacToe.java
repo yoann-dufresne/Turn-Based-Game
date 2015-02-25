@@ -24,7 +24,7 @@ import games.tictactoe.TicTacToe;
 
 import java.util.Set;
 
-import model.fsm.State;
+import model.fsm.SimpleState;
 import model.moves.Move;
 import model.players.Player;
 
@@ -33,7 +33,7 @@ import model.players.Player;
  * 
  * @author Celia Cacciatore - Raphael Bauduin
  */
-public class TurnTicTacToe extends State <TicTacToe> {
+public class TurnTicTacToe extends SimpleState <TicTacToe> {
 	
 	public TurnTicTacToe(Player currentPlayer, Set<Class<? extends Move<TicTacToe>>> possibleMoveTypes) {
 		super(currentPlayer, possibleMoveTypes);

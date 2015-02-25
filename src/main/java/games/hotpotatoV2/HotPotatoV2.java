@@ -18,13 +18,12 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package games.hotpotato;
+package games.hotpotatoV2;
 
-import games.hotpotato.fsm.TurnHotPotato;
-import games.hotpotato.moves.Pass;
+import games.hotpotatoV2.fsm.TurnHotPotato;
+import games.hotpotatoV2.moves.Pass;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -40,18 +39,18 @@ import model.players.Player;
  * @author Celia Cacciatore - Raphael Bauduin
  */
 
-public class HotPotato extends Game {
+public class HotPotatoV2 extends Game {
 
 	private static final int LOWER = 5;
 	private static final int HIGHER = 10;
-	
+
 	private int counter;
-	
+
 	/**
 	 * A new HotPotato game.
 	 * @param players the players involved in the game
 	 */
-	public HotPotato(List<Player> players) {
+	public HotPotatoV2(List<Player> players) {
 		super(players);
 		this.counter = (int)(Math.random() * (HIGHER-LOWER + 1)) + LOWER;
 	}
@@ -59,38 +58,29 @@ public class HotPotato extends Game {
 	@Override
 	public void initializeStates() {
 		// Possible moves types for all states
-		Set<Class<? extends Move<HotPotato>>> possibleMoveTypes = new HashSet<Class<? extends Move<HotPotato>>>();
+		Set<Class<? extends Move<HotPotatoV2>>> possibleMoveTypes = new HashSet<Class<? extends Move<HotPotatoV2>>>();
 		possibleMoveTypes.add(Pass.class);
-		
+
 		// State creations
-		for (Player player : this.getPlayers()) {
-			this.states.add((State<HotPotato>) new TurnHotPotato(player,possibleMoveTypes));
-		}
+		TurnHotPotato theUniqueState = new TurnHotPotato(this.getRandomPlayer(),possibleMoveTypes) ;
+		this.states.add(theUniqueState);
+
+
+		// Possible destinations for the state, is the state itself
+		Set<State<HotPotatoV2>> possibleDestinations = new HashSet<State<HotPotatoV2>>();
+		possibleDestinations.add(theUniqueState);
+		theUniqueState.setPossibleDestinations(possibleDestinations);
 		
-		// Possible destinations for each state
-		Iterator<State<? extends Game>> it = this.states.iterator();
-		while(it.hasNext()){
-			State<HotPotato> state = (State<HotPotato>)it.next();
-			Set<State<HotPotato>> possibleDestinations = new HashSet<State<HotPotato>>();
-			Iterator<State<? extends Game>> itPossible = this.states.iterator();
-			while(itPossible.hasNext()){
-				State<HotPotato> statePossible = (State<HotPotato>)itPossible.next();
-				if (state != statePossible){
-					possibleDestinations.add(statePossible);
-				}
-			}
-			state.setPossibleDestinations(possibleDestinations);
-		}
-		
+
 		// Initial state
-		this.currentState = (State<? extends Game>) this.states.toArray()[(int)(Math.random() * this.states.size())];
+		this.currentState = theUniqueState;
 	}
-	
+
 	@Override
 	public void initializeOrder(List<Player> players) {
 		this.order = new NotOrdered(players, this);
 	}
-	
+
 	/**
 	 * Tests if the game is finished.
 	 * @return true if the game is finished, else false
@@ -103,12 +93,20 @@ public class HotPotato extends Game {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Passes the ball to player.
 	 * @param player the player who will get the ball.
 	 */
 	public void passPotato(Player player) {
 		this.counter--;
+		//this.currentState.setCurrentPlayer(player);
 	}
+	
+	
+	private Player getRandomPlayer(){
+		return this.getPlayers().get(   (int)( Math.random() * this.getPlayers().size() )   );
+	}
+	
+	
 }

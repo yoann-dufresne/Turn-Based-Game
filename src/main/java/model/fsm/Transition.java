@@ -45,4 +45,6 @@ public abstract class Transition<G extends Game> {
 	public void setNext(State<G> next) {
 		this.next = next;
 	}
+	
+	
 }

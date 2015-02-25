@@ -20,10 +20,11 @@
 
 package games.hotpotato.fsm;
 
+import games.hotpotato.HotPotato;
+
 import java.util.Set;
 
-import games.hotpotato.HotPotato;
-import model.fsm.State;
+import model.fsm.SimpleState;
 import model.moves.Move;
 import model.players.Player;
 
@@ -32,7 +33,7 @@ import model.players.Player;
  * 
  * @author Celia Cacciatore - Raphael Bauduin
  */
-public class TurnHotPotato extends State <HotPotato> {
+public class TurnHotPotato extends SimpleState <HotPotato> {
 
 	public TurnHotPotato(Player currentPlayer, Set<Class<? extends Move<HotPotato>>> possibleMoveTypes) {
 		super(currentPlayer, possibleMoveTypes);

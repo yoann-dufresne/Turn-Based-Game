@@ -2,7 +2,7 @@
  * This application simulates turn-based games hosted on a server.
  *     Copyright (C) 2014 
  *     Initiators : Fabien Delecroix and Yoann Dufresne
- *     Developpers :  Celia Cacciatore and Guillaume Ferlin and Raphael Bauduin and Robin Lewandowicz and Yassine Badache
+ *     Developpers :  Celia Cacciatore, Guillaume Ferlin, Raphael Bauduin, Robin Lewandowicz and Yassine Badache
  * 
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -18,27 +18,18 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package games.isola.fsm;
+package model.fsm;
 
-import games.isola.Isola;
-
-import java.util.Set;
-
-import model.fsm.SimpleState;
-import model.moves.Move;
-import model.players.Player;
-
+import model.Game;
 
 /**
- * TurnIsolaPutCross : the state active when a player have to condamn a case
- * 
- * @author Guillaume Ferlin - Robin Lewandowicz - Yassine Badache
+ * @author LIVEBOX52
+ *
  */
-public class TurnIsolaPutCross extends SimpleState<Isola> {
+public abstract class BidirectionnalTransition<G extends Game> {
 
-	public TurnIsolaPutCross(Player currentPlayer,
-			Set<Class<? extends Move<Isola>>> possibleMoveTypes) {
-		super(currentPlayer, possibleMoveTypes);
-	}
-
+	
+	
+	
+	
 }

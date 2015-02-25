@@ -2,7 +2,7 @@
  * This application simulates turn-based games hosted on a server.
  *     Copyright (C) 2014 
  *     Initiators : Fabien Delecroix and Yoann Dufresne
- *     Developpers :  Celia Cacciatore and Guillaume Ferlin and Raphael Bauduin and Robin Lewandowicz and Yassine Badache
+ *     Developpers : Raphael Bauduin and Celia Cacciatore
  * 
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -18,27 +18,39 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package games.isola.fsm;
+package games.hotpotatoV2.moves;
 
-import games.isola.Isola;
-
-import java.util.Set;
-
-import model.fsm.SimpleState;
+import games.hotpotatoV2.HotPotatoV2;
+import model.exceptions.IncorrectNumberOfArgumentsException;
+import model.exceptions.IncorrectTypesOfArgumentException;
 import model.moves.Move;
-import model.players.Player;
-
+import model.moves.MoveFactory;
 
 /**
- * TurnIsolaPutCross : the state active when a player have to condamn a case
+ * Creates the move which passes the ball to another player in the HotPotato game.
  * 
- * @author Guillaume Ferlin - Robin Lewandowicz - Yassine Badache
+ * @author Celia Cacciatore - Raphael Bauduin
  */
-public class TurnIsolaPutCross extends SimpleState<Isola> {
+public class PassFactory extends MoveFactory<HotPotatoV2> {
 
-	public TurnIsolaPutCross(Player currentPlayer,
-			Set<Class<? extends Move<Isola>>> possibleMoveTypes) {
-		super(currentPlayer, possibleMoveTypes);
+	@Override
+	public boolean correctKeyword(String message) {
+		return message.split(" ")[0].equals("pass");
 	}
-
+	
+	@Override
+	public Move<HotPotatoV2> create(String message) throws Exception {
+		String[] args = message.split(" ");
+		// Creation of Pass move
+		String player;
+		try {
+			// The player who will get the ball.
+			player = args[1];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new IncorrectNumberOfArgumentsException();
+		} catch (ClassCastException e) {
+			throw new IncorrectTypesOfArgumentException();
+		}
+		return new Pass(player);
+	}
 }

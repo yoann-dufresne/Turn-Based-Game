@@ -2,7 +2,7 @@
  * This application simulates turn-based games hosted on a server.
  *     Copyright (C) 2014 
  *     Initiators : Fabien Delecroix and Yoann Dufresne
- *     Developpers :  Celia Cacciatore and Guillaume Ferlin and Raphael Bauduin and Robin Lewandowicz and Yassine Badache
+ *     Developpers : Raphael Bauduin and Celia Cacciatore
  * 
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -18,27 +18,30 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package games.isola.fsm;
+package games.hotpotatoV2;
 
-import games.isola.Isola;
-
-import java.util.Set;
-
-import model.fsm.SimpleState;
-import model.moves.Move;
-import model.players.Player;
-
+import clients.local.LocalClientFactory;
+import model.engine.GameHost;
+import games.hotpotatoV2.moves.PassFactory;
 
 /**
- * TurnIsolaPutCross : the state active when a player have to condamn a case
+ * Hosts the HotPotato game.
  * 
- * @author Guillaume Ferlin - Robin Lewandowicz - Yassine Badache
+ * @author Cacciatore Celia - Bauduin Raphael
  */
-public class TurnIsolaPutCross extends SimpleState<Isola> {
+public class HotPotatoHostV2 extends GameHost<HotPotatoV2> {
 
-	public TurnIsolaPutCross(Player currentPlayer,
-			Set<Class<? extends Move<Isola>>> possibleMoveTypes) {
-		super(currentPlayer, possibleMoveTypes);
+	public HotPotatoHostV2() {
+		super(4, new LocalClientFactory());
 	}
 
+	@Override
+	protected void createGame() {
+		this.game = new HotPotatoV2(this.players);
+	}
+
+	@Override
+	protected void createFactories() {
+		this.firstMoveFactory = new PassFactory();
+	}
 }

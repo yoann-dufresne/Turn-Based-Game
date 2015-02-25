@@ -2,7 +2,7 @@
  * This application simulates turn-based games hosted on a server.
  *     Copyright (C) 2014 
  *     Initiators : Fabien Delecroix and Yoann Dufresne
- *     Developpers :  Celia Cacciatore and Guillaume Ferlin and Raphael Bauduin and Robin Lewandowicz and Yassine Badache
+ *     Developpers :  Celia Cacciatore, Guillaume Ferlin, Raphael Bauduin, Robin Lewandowicz and Yassine Badache
  * 
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -18,27 +18,46 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package games.isola.fsm;
+package model.fsm;
 
-import games.isola.Isola;
-
-import java.util.Set;
-
-import model.fsm.SimpleState;
+import model.Game;
+import model.exceptions.GameException;
 import model.moves.Move;
 import model.players.Player;
 
-
 /**
- * TurnIsolaPutCross : the state active when a player have to condamn a case
- * 
- * @author Guillaume Ferlin - Robin Lewandowicz - Yassine Badache
+ * @author Robin Lewandowicz, Guillaume Ferlin
+ *
  */
-public class TurnIsolaPutCross extends SimpleState<Isola> {
+public abstract class SuperState<G extends Game> implements State<G> {
 
-	public TurnIsolaPutCross(Player currentPlayer,
-			Set<Class<? extends Move<Isola>>> possibleMoveTypes) {
-		super(currentPlayer, possibleMoveTypes);
+	
+
+
+	
+	
+	/**
+	 * Returns the current player.
+	 * @return the current player
+	 */
+	public Player getCurrentPlayer(){
+		// TODO NYI
+		return null;
+	}
+	
+	/**
+	 * Plays the move executed by player.
+	 * @param game the game on which the move is played
+	 * @param move the move to execute
+	 * @param player the player who played the move
+	 * @throws Exception exceptions thrown when playing the move, depend of the game
+	 */
+	public void play(Game game, Move<? extends Game> move, Player player) throws GameException{
+		// TODO NYI
 	}
 
+
+	
+	
+	
 }
