@@ -38,7 +38,7 @@ public class TurnIsolaMove extends SimpleState<Isola> {
 
 	public TurnIsolaMove(Player currentPlayer,
 			Set<Class<? extends Move<Isola>>> possibleMoveTypes) {
-		super(currentPlayer, possibleMoveTypes);
+		super(true, currentPlayer, possibleMoveTypes);
 	}
 
 }

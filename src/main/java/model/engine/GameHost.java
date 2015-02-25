@@ -81,7 +81,7 @@ public abstract class GameHost<G extends Game> {
 	 * Plays the game.
 	 */
 	public void playGame() {
-		while (!game.isFinished()) {
+		while (!game.isOver()) {
 			boolean correctMove = false;	
 			do {
 				Player player = game.getCurrentPlayer();

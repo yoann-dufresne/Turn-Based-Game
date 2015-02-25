@@ -36,6 +36,6 @@ import model.players.Player;
 public class TurnHotPotato extends SimpleState<HotPotatoV2> {
 
 	public TurnHotPotato(Player currentPlayer, Set<Class<? extends Move<HotPotatoV2>>> possibleMoveTypes) {
-		super(currentPlayer, possibleMoveTypes);
+		super(true, currentPlayer, possibleMoveTypes);
 	}
 }

@@ -20,6 +20,8 @@
 
 package model.fsm;
 
+import java.util.Set;
+
 import model.Game;
 import model.exceptions.GameException;
 import model.moves.Move;
@@ -56,7 +58,38 @@ public abstract class SuperState<G extends Game> implements State<G> {
 		// TODO NYI
 	}
 
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see model.fsm.State#setPossibleDestinations(java.util.Set)
+	 */
+	@Override
+	public void setPossibleDestinations(Set<State<G>> possibleDestinations) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	/* (non-Javadoc)
+	 * @see model.fsm.State#setCurrentPlayer(model.players.Player)
+	 */
+	@Override
+	public void setCurrentPlayer(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * For the moment, only Simple State can be final
+	 */
+	@Override
+	public boolean isFinalState() {
+		return false;
+	}
+
+
+	
+	
 	
 	
 	

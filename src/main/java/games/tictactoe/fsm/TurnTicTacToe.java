@@ -36,6 +36,6 @@ import model.players.Player;
 public class TurnTicTacToe extends SimpleState <TicTacToe> {
 	
 	public TurnTicTacToe(Player currentPlayer, Set<Class<? extends Move<TicTacToe>>> possibleMoveTypes) {
-		super(currentPlayer, possibleMoveTypes);
+		super(true, currentPlayer, possibleMoveTypes);
 	}
 }

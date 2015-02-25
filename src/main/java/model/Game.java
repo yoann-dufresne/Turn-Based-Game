@@ -96,10 +96,24 @@ public abstract class Game {
 	public abstract void initializeOrder(List<Player> players);
 	
 	/**
+	 * Test if the game is over (the game is over when the current 
+	 * state is a final state, and the game rules (isFinished) say
+	 * that the end of the game)
+	 * 
+	 * @return true if the game is over
+	 */
+	public boolean isOver(){
+		if(currentState.isFinalState())
+			return isFinished();
+		else
+			return false;
+	}
+	
+	/**
 	 * Tests if the game is finished or not.
 	 * @return true if the game is finished, else false.
 	 */
-	public abstract boolean isFinished();
+	protected abstract boolean isFinished();
 	
 	/**
 	 * Returns the players who won the game.

@@ -38,7 +38,7 @@ public class TurnIsolaPutCross extends SimpleState<Isola> {
 
 	public TurnIsolaPutCross(Player currentPlayer,
 			Set<Class<? extends Move<Isola>>> possibleMoveTypes) {
-		super(currentPlayer, possibleMoveTypes);
+		super(false, currentPlayer, possibleMoveTypes);
 	}
 
 }

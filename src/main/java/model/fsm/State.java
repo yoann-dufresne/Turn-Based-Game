@@ -61,5 +61,7 @@ public interface State<G extends Game> {
 	 */
 	public void setCurrentPlayer(Player player);
 
+	
+	public boolean isFinalState();
 
 }

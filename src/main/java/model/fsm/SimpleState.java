@@ -51,6 +51,12 @@ public abstract class SimpleState<G extends Game> implements State<G>{
 	 * the different moves that can be played in this State
 	 */
 	protected Set<Class<? extends Move<G>>> possibleMoveTypes;
+	
+	/**
+	 * if it's true, the State is a final state, the game can over at this state 
+	 * (multiple final state is possible)
+	 */
+	protected boolean isFinalState;
 
 
 
@@ -58,8 +64,9 @@ public abstract class SimpleState<G extends Game> implements State<G>{
 	 * @param currentPlayer the player who has the right to play
 	 * @param possibleMoveTypes the different moves that can be played in this State
 	 */
-	public SimpleState(Player currentPlayer, Set<Class<? extends Move<G>>> possibleMoveTypes) {
+	public SimpleState(boolean isFinalState, Player currentPlayer, Set<Class<? extends Move<G>>> possibleMoveTypes) {
 		super();
+		this.isFinalState = isFinalState;
 		this.currentPlayer = currentPlayer;
 		this.possibleMoveTypes = possibleMoveTypes;
 	}
@@ -123,4 +130,11 @@ public abstract class SimpleState<G extends Game> implements State<G>{
 		}
 	}
 
+
+	@Override
+	public boolean isFinalState() {
+		return isFinalState;
+	}
+
+	
 }
