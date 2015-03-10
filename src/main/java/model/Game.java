@@ -139,6 +139,7 @@ public abstract class Game {
 	 * @throws Exception depending of the game and the move
 	 */
 	public void play(Move<? extends Game> move, Player player) throws Exception{
-		this.currentState.play(this, move, player);
+		State<? extends Game> nextState = this.currentState.play(this, move, player);
+		this.setCurrentState(nextState);
 	}
 }

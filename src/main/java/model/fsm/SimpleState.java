@@ -35,7 +35,7 @@ import model.players.Player;
  *
  * @param <G> the game of which this is a state.
  */
-public abstract class SimpleState<G extends Game> implements State<G>{
+public abstract class SimpleState<G extends Game> extends State<G>{
 
 	/**
 	 * The player who has the right to play
@@ -51,7 +51,7 @@ public abstract class SimpleState<G extends Game> implements State<G>{
 	 * the different moves that can be played in this State
 	 */
 	protected Set<Class<? extends Move<G>>> possibleMoveTypes;
-	
+
 	/**
 	 * if it's true, the State is a final state, the game can over at this state 
 	 * (multiple final state is possible)
@@ -78,7 +78,7 @@ public abstract class SimpleState<G extends Game> implements State<G>{
 	public Player getCurrentPlayer() {
 		return this.currentPlayer;
 	}
-	
+
 
 	/**
 	 * @param currentPlayer the currentPlayer to set
@@ -114,20 +114,27 @@ public abstract class SimpleState<G extends Game> implements State<G>{
 	 * @param game the game on which the move is played
 	 * @param move the move to execute
 	 * @param player the player who played the move
+	 * @return the new current state of the game
 	 * @throws Exception exceptions thrown when playing the move, depend of the game
 	 */
-	public void play(Game game, Move<? extends Game> move, Player player) throws GameException{
-		Move<G> newMove= (Move<G>) move;
-		if (this.check(newMove)){
-			try {
+	public State<G> play(Game game, Move<? extends Game> move, Player player) throws GameException{
+		
+		try {
+			Move<G> newMove= (Move<G>) move;
+			
+			if (this.check(newMove)){
+
+				
 				newMove.execute((G)game, player, this.possibleDestinations);
-			} catch (ClassCastException e) {
+				return newMove.getNext();
+				
+			} else {
 				throw new IllegalMoveException();
 			}
-			game.setCurrentState(move.getNext());
-		} else {
+		} catch (ClassCastException e) {
 			throw new IllegalMoveException();
 		}
+		
 	}
 
 
@@ -136,5 +143,5 @@ public abstract class SimpleState<G extends Game> implements State<G>{
 		return isFinalState;
 	}
 
-	
+
 }

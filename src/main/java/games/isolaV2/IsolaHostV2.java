@@ -2,7 +2,7 @@
  * This application simulates turn-based games hosted on a server.
  *     Copyright (C) 2014 
  *     Initiators : Fabien Delecroix and Yoann Dufresne
- *     Developpers :  Celia Cacciatore, Guillaume Ferlin, Raphael Bauduin, Robin Lewandowicz and Yassine Badache
+ *     Developpers :  Celia Cacciatore and Guillaume Ferlin and Raphael Bauduin and Robin Lewandowicz and Yassine Badache
  * 
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -18,18 +18,43 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package model.fsm;
+package games.isolaV2;
 
-import model.Game;
+import games.isolaV2.moves.MovePlayerFactory;
+import games.isolaV2.moves.PutCrossFactory;
+import model.engine.GameHost;
+import clients.local.LocalClientFactory;
+
 
 /**
- * @author LIVEBOX52
- *
+ * IsolaHost : the host who can create an instance of the isola game
+ * 
+ * @author Guillaume Ferlin - Robin Lewandowicz
  */
-public abstract class BidirectionnalTransition<G extends Game> {
+public class IsolaHostV2 extends GameHost<IsolaV2> {
 
+	public IsolaHostV2() {
+		super(2, new LocalClientFactory());
+	}
+
+	@Override
+	protected void createGame() {
+		this.game = new IsolaV2(players);
+	}
+
+	@Override
+	protected void createFactories() {
+		
+		// create and chain the differents factories
+		
+		MovePlayerFactory mpFact = new MovePlayerFactory();
+		PutCrossFactory pcFact = new PutCrossFactory();
+		
+		mpFact.setNext(pcFact);
+		pcFact.setNext(mpFact);
+		
+		this.firstMoveFactory = mpFact;
 	
-	
-	
-	
+	}
+
 }

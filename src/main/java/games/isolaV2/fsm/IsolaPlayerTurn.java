@@ -18,51 +18,33 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package model.fsm;
+package games.isolaV2.fsm;
 
+import games.isolaV2.IsolaV2;
+
+import java.util.LinkedList;
 import java.util.Set;
 
-import model.Game;
-import model.exceptions.GameException;
-import model.moves.Move;
+import model.fsm.SimpleState;
+import model.fsm.SuperState;
 import model.players.Player;
 
 /**
- * Represents an abstraction of the different states of a game.
- * 
- * @author Robin Lewandowicz, Guillaume Ferlin
+ * @author LIVEBOX52
  *
- * @param <G> the game of which this is a state.
  */
-public abstract class State<G extends Game> {
+public class IsolaPlayerTurn extends SuperState<IsolaV2> {
 
 	/**
-	 * Returns the current player.
-	 * @return the current player
+	 * @param statesSet
+	 * @param firstState
+	 * @param lastState
+	 * @param playerOrder
 	 */
-	public abstract Player getCurrentPlayer();
-
-	/**
-	 * Plays the move executed by player.
-	 * @param game the game on which the move is played
-	 * @param move the move to execute
-	 * @param player the player who played the move
-	 * @return the new current state of the game
-	 * @throws Exception exceptions thrown when playing the move, depend of the game
-	 */
-	public abstract State<G> play(Game game, Move<? extends Game> move, Player player) throws GameException;
-
-	/**
-	 * @param possibleDestinations
-	 */
-	public abstract void setPossibleDestinations(Set<State<G>> possibleDestinations);
-
-	/**
-	 * @param player the new current player of the state
-	 */
-	public abstract void setCurrentPlayer(Player player);
-
-	
-	public abstract boolean isFinalState();
+	public IsolaPlayerTurn(Set<SimpleState<IsolaV2>> statesSet,
+			SimpleState<IsolaV2> firstState, SimpleState<IsolaV2> lastState,
+			LinkedList<Player> playerOrder) {
+		super(statesSet, firstState, lastState, playerOrder);
+	}
 
 }
